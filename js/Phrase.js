@@ -5,7 +5,11 @@
  this file creates a Phrase class to handle the creation of phrases
  */
 
+ class Phrase {    
+    // Step Three: Create a constructor method inside Phrase class
+    constructor(phrase) {
+        this.phrase = phrase.toLowerCase(); 
+    }
 
- class Phrase {
-    //  do something here!
+
  }

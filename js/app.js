@@ -7,8 +7,3 @@
  
  */
 
-
- const phrase = new Phrase();
- console.log(Phrase);
- const game = new Game(); 
- console.log(Game);
