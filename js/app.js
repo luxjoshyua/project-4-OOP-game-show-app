@@ -7,5 +7,8 @@
  
  */
 
-const phrase = new Phrase('test mnew'); 
-phrase.addPhraseToDisplay();
+// Step Six testing method
+// const phrase = new Phrase('test phrase here'); 
+// phrase.addPhraseToDisplay();
+
+

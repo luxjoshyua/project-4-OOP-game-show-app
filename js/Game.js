@@ -8,7 +8,6 @@
  
  */
 
-
 //  Create a constructor method inside each class
 class Game {
     // Step Three: Create a constructor method inside each class
@@ -36,21 +35,39 @@ class Game {
 
     getRandomPhrase() {
         // Step Five: getRandomPhrase needs to select the random phrase then return the random phrase
-        let randomPhrase = this.phrases[Math.floor(Math.random() * this.phrases.length)];
+        let randomPhrase = this.phrases[ Math.floor( Math.random() * this.phrases.length ) ];
         return randomPhrase;
     }
 
+    /* Step Seven: startGame() method
+        - this method begins game by selecting a random phrase and displaying it to user 
+    */
+    startGame() {
 
-    /* Step Six: create a method called `addPhraseToDisplay()`. 
+        // 1. Hide the start screen overlay(the `div` element with an `id` of `overlay`)
+        const hideScreen = document.getElementById('overlay');
+        hideScreen.style.display = 'none';
 
-    This method adds letter placeholders to the display when the game starts. 
-    Each letter is presented by an empty box, one list item for each letter. 
-    See the example_phrase_html.txt file for an example of what the render HTML for a phrase 
-    should look like when the game starts, including any `id` or `class` attributes needed. 
-    When the player correctly guesses a letter, the empty box is replaced with the matched letter 
-    (see the `showMatchedLetter()` method below). 
-    Make sure the phrase displayed on the screen uses the `letter` CSS class for letters and the
-     `space` CSS class for space. */
+        // 2. Call the `getRandomPhrase()` method to select a Phrase object from the Game object’s array of phrases
+        // you've already set this method up above, just call it here
+        getRandomPhrase(); 
 
-    
+        // 3. Add the phrase to the gameboard by calling the `addPhraseToDisplay()` method (which is a method on the Phrase class) on the selected Phrase object.
+        //   The selected phrase should be stored in the Game’s `activePhrase` property, so it can be easily accessed throughout the game. 
+        
+        // how do you call a method on the select object (this.phrases)
+        addPhraseToDisplay(); this.phrases
+
+        this.activePhrase = 
+
+
+
+
+
+
+    }
+
+
+
+
 }
