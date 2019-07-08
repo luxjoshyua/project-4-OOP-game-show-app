@@ -52,23 +52,5 @@ class Game {
     Make sure the phrase displayed on the screen uses the `letter` CSS class for letters and the
      `space` CSS class for space. */
 
-    addPhraseToDisplay() {
-
-        // 1. Create a div with id `phrase` and class `section`, append to DOM
-        const phraseDiv = document.createElement('div');
-        phraseDiv.id = 'phrase'; 
-        phraseDiv.classList.add('section');
-        const body = document.getElementsByTagName('body');
-        body.appendChild(phraseDiv); 
-       
-        // 2. Create a ul, appendChild to div
-        const ul = document.createElement('ul');
-        phraseDiv.appendChild(ul); 
-
-        // 3. Create 11 li elements, nest within ul
-        
-
-
-    }
-
+    
 }

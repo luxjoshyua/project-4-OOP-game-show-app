@@ -7,3 +7,5 @@
  
  */
 
+const phrase = new Phrase('test mnew'); 
+phrase.addPhraseToDisplay();
