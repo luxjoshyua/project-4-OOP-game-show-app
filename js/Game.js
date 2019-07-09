@@ -43,31 +43,22 @@ class Game {
         - this method begins game by selecting a random phrase and displaying it to user 
     */
     startGame() {
-
         // 1. Hide the start screen overlay(the `div` element with an `id` of `overlay`)
         const hideScreen = document.getElementById('overlay');
         hideScreen.style.display = 'none';
 
         // 2. Call the `getRandomPhrase()` method to select a Phrase object from the Game object’s array of phrases
-        // you've already set this method up above, just call it here
-        getRandomPhrase(); 
+        this.activePhrase = this.getRandomPhrase(); 
+        console.log(this.activePhrase); 
 
-        // 3. Add the phrase to the gameboard by calling the `addPhraseToDisplay()` method (which is a method on the Phrase class) on the selected Phrase object.
-        //   The selected phrase should be stored in the Game’s `activePhrase` property, so it can be easily accessed throughout the game. 
+        // 3.  Setup phrase variable, then run it by calling the new Phrase(); 
+        const phrase = new Phrase( this.activePhrase );
         
+
+        // 4. Add the phrase to the gameboard by calling the `addPhraseToDisplay()` method (which is a method on the Phrase class) on the selected Phrase object.
+        //   The selected phrase should be stored in the Game’s `activePhrase` property, so it can be easily accessed throughout the game. 
         // how do you call a method on the select object (this.phrases)
-        addPhraseToDisplay(); this.phrases
-
-        this.activePhrase = 
-
-
-
-
-
-
+        phrase.addPhraseToDisplay( );
     }
-
-
-
 
 }

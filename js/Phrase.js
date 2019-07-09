@@ -8,7 +8,7 @@
 class Phrase {
     // Step Three: Create a constructor method inside Phrase class
     constructor(phrase) {
-        this.phrase = phrase.toLowerCase();
+        this.phrase = phrase.phrase.toLowerCase();
     }
 
     // Step Six: addPhraseToDisplay() method
