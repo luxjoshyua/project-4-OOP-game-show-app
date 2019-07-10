@@ -36,7 +36,7 @@ class Phrase {
             const currentLetter = phraseSplit[i];
             // setup loop for inserting li elements
             const li = document.createElement('li');
-            // here we add the classes defined in example_phrase_html.txt file
+            // add the classes defined in example_phrase_html.txt file
             if (currentLetter === ' ') {
                 li.classList.add('space');
             } else {
