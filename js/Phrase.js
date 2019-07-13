@@ -6,12 +6,12 @@
  */
 
 class Phrase {
-    // Step Three: Create a constructor method inside Phrase class
+    // -- Step Three: Create a constructor method inside Phrase class
     constructor(phrase) {
         this.phrase = phrase.phrase.toLowerCase();
     }
 
-    // Step Six: addPhraseToDisplay() method
+    // -- Step Six: addPhraseToDisplay() method
     addPhraseToDisplay() {
         // 1. Create a div with id `phrase` and class `section`, append to DOM
         const phraseDiv = document.getElementById('phrase');
@@ -31,7 +31,7 @@ class Phrase {
         // console.log(phraseSplit);
 
         // 3. Create li elements in a loop, then nest within ul
-        for ( let i = 0; i < phraseSplit.length; i++ ) {
+        for (let i = 0; i < phraseSplit.length; i++) {
             // console.log(phraseSplit[i]);
             const currentLetter = phraseSplit[i];
             // setup loop for inserting li elements
@@ -47,4 +47,57 @@ class Phrase {
             ul.appendChild(li);
         }
     }
+
+    /* -- Step Nine: checkLetter()
+    Checks if passed letter is in phrase
+    This method needs to do two specific things:
+        1. The clicked/chosen letter must be captured
+        2. The clicked letter must be checked against the phrase for a match
+    */
+
+    checkLetter(letter) {
+        // 1. Capture the clicked/chosen letter in an event   
+        const button = document.querySelectorAll('.keyrow button');
+        document.button.textContent.onclick = function (e) {
+
+            // 2. Check the clicked letter against the phrase for a match
+            const phraseString = this.activePhrase; 
+            
+            if ( button.includes( phraseString ) ) {
+                // .includes() already returns true or false by default!
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /* Step Nine: showMatchedLetter()
+    Displays passed letter on screen after a match is found
+
+    To reveal the matching letter(s):
+        1. select all of the letter DOM elements that have a CSS class name that matches the selected letter and
+        2. replace each selected element's `hide` CSS class with the `show` CSS class
+
+    */
+
+
+    // showMatchedLetter(letter) {
+
+    //     // 1. Select all of the letter DOM elements that have a CSS class name that matches the selected letter
+
+    //     const match = 
+
+    // chosen class or wrong class
+
+
+    //     // 2. Replace each selected element's `hide` CSS class with the `show` CSS class
+        
+    // }
+
+
+
+
+
+
 }
