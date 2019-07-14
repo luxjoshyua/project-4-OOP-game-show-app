@@ -57,19 +57,19 @@ class Phrase {
 
     checkLetter(letter) {
         // 1. Capture the clicked/chosen letter in an event   
-        const button = document.querySelectorAll('.keyrow button');
-        document.button.textContent.onclick = function (e) {
-
+        const letterClicked = document.getElementsByClassName('key').textContent();
+        letterClicked.addEventListener('click', (e) => {
+            // select the active phrase you are going to compare against, but split it into characters
+            const phrase = this.activePhrase.split('');
             // 2. Check the clicked letter against the phrase for a match
-            const phraseString = this.activePhrase; 
-            
-            if ( button.includes( phraseString ) ) {
-                // .includes() already returns true or false by default!
+            if ( letterClicked === phrase ) {
+            // if ( letterClicked.includes( phrase.split('') ) ) {
                 return true;
             } else {
                 return false;
             }
-        }
+        });
+
     }
 
     /* Step Nine: showMatchedLetter()
@@ -92,7 +92,7 @@ class Phrase {
 
 
     //     // 2. Replace each selected element's `hide` CSS class with the `show` CSS class
-        
+
     // }
 
 
