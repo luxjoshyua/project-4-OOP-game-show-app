@@ -57,18 +57,17 @@ class Phrase {
 
     checkLetter(letter) {
         // 1. Capture the clicked/chosen letter in an event   
-        const letterClicked = document.getElementsByClassName('key').textContent();
-        letterClicked.addEventListener('click', (e) => {
+    
             // select the active phrase you are going to compare against, but split it into characters
             const phrase = this.activePhrase.split('');
+
             // 2. Check the clicked letter against the phrase for a match
-            if ( letterClicked === phrase ) {
-            // if ( letterClicked.includes( phrase.split('') ) ) {
+            if ( this.activePhrase.contains(letter) ) {
                 return true;
             } else {
                 return false;
             }
-        });
+      
 
     }
 

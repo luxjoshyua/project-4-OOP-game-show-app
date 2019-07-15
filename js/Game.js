@@ -30,6 +30,15 @@ class Game {
             }
         ]
         this.activePhrase = 'null';
+
+        // call click event on keyboard
+
+        const keyboard = document.getElementById('qwerty'); 
+        keyboard.addEventListener('click', (e) => {
+            this.handleInteraction(e); 
+        })
+
+
     }
 
     getRandomPhrase() {
@@ -48,10 +57,10 @@ class Game {
         this.activePhrase = this.getRandomPhrase(); 
         // console.log(this.activePhrase); 
         // 3. Setup phrase variable, then run it by calling the new Phrase(); 
-        const phrase = new Phrase( this.activePhrase );
+        this.phrase = new Phrase( this.activePhrase );
         // 4. Add the phrase to the gameboard
         // The selected phrase should be stored in the Game’s `activePhrase` property, so it can be easily accessed throughout the game. 
-        phrase.addPhraseToDisplay( );
+        this.phrase.addPhraseToDisplay( );
     }
 
 
@@ -59,10 +68,18 @@ class Game {
     -- Step Nine: handleInteraction() method
     */
 
-    // handleInteraction() {
-    //     // all the submethods go in here
-    // }
+    handleInteraction(e) {
+        console.log(e); 
+        // all the submethods go in here
+        // this.phrase.checkLetter(); 
+
+        // this is the character clicked`
+        // e.target.textContent();
+        console.log( e.target.textContent ); 
+        this.phrase.checkLetter(e.target.textContent);
+    }
 
 
 
 }
+
