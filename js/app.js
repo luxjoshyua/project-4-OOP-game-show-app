@@ -6,11 +6,6 @@
  for the start button and onscreen keyboard buttons 
  */
 
-// Step Seven testing method
-// const game = new Game();
-// game.startGame();
-// console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
-
 // -- Step Eight: EventListener for 'Start Game' Button
 // Declare a new variable called `game` that’s not set to anything.
 let game
