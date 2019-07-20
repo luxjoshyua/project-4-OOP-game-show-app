@@ -12,8 +12,6 @@ class Game {
     // -- Step Three: Create a constructor method inside each class
     constructor() {
         this.missed = 0;
-
-        
         // -- Step Four: add 5 new Phrase objects directly in the empty array that was originally set as the value of the `phrases` property. 
         this.phrases = [{
                 phrase: 'good morning sunshine'
@@ -63,23 +61,33 @@ class Game {
     }
 
     /*
-    -- Step Nine: handleInteraction() method
+    -- Step Nine: handleInteraction()
     */
     handleInteraction(e) {
-        // console.log(e); 
-        // all the submethods go in here
-        // this is the character clicked
-        // console.log( e.target.textContent ); 
+        // console.log(e); check the event is actually registering
+        // console.log( e.target.textContent ); this is the text character clicked
+        // this variable holds the keyboard button clicked
+        const clicked = e.target;
+    
+        /* -- Step Eleven: build out the handleInteraction()
+        */
+
         if (this.phrase.checkLetter(e.target.textContent) === true) {
             this.checkForWin();
+            // add `chosen` class to the clicked character
+            clicked.classList.add('chosen');
         } else {
             this.removeLife();
+            // add `wrong` class to the clicked character
+            clicked.classList.add('wrong');
+            // prevent the user from clicking the same wrong button again
+            clicked.disabled = 'true'; 
         }
     }
 
     /*
     -- Step Nine: checkForWin()
-    checks for winning move
+    Checks for winning move
     */
     checkForWin() {
         // select the phrase
@@ -98,13 +106,16 @@ class Game {
 
     /*
     -- Step Nine: removeLife()
+    Increases the value of the missed property
+    Removes a life from the scoreboard
+    Checks if player has remaining lives and ends game if player is out
     */
     removeLife() {
         // select the heart images
         const hearts = document.querySelectorAll('.tries img');
         // select the heart, swap the image 
         hearts[this.missed].src = 'images/lostHeart.png';
-        console.log('removeLife method reached'); 
+        // console.log('removeLife method reached'); 
         this.missed += 1;
         if (this.missed >= 5) {
             // you need the `this` because it's all happening in the same Game class
@@ -122,7 +133,7 @@ class Game {
         // show the original start screen
         const startScreen = document.getElementById('overlay');
         startScreen.style.display = 'flex';
-        const heading = document.querySelector('#overlay .title');
+        const heading = document.querySelector('#game-over-message');
         // when you lose, you need to reset the grey hearts to blue hearts
         if (gameWon) {
             // If the player wins, update the h1
@@ -138,17 +149,35 @@ class Game {
     }
     // reset the hearts method
     resetLife() {
+        // reset the hearts back to full blue
         const hearts = document.querySelectorAll('.tries img');
-        // for (let i = 0; i < hearts.length; i++) {
-        //     hearts[i].src = 'images/liveHeart.png';
-        // }
-        hearts.forEach(function(heart){
+        hearts.forEach(function (heart) {
             heart.src = 'images/liveHeart.png';
         });
         // reset the missed property to 0
         this.missed = 0;
-    }
 
-    
+        // remove the `wrong` and `chosen` classes for the relevant clicked button when the game resets
+
+        // maybe setup a loop, go through all the buttons, see if they do have those classes, and then remove?
+
+        const button = document.querySelectorAll('.keyrow button'); 
+        // console.log(button); loops through them all correctly
+
+        for ( let i = 0; i < button.length; i++ ) {
+            const j = buttons[i]; 
+            if ( j.classList.contains('chosen') ) {
+                j.classList.remove('chosen'); 
+            } else if (j.classList.contains('wrong') ) {
+                j.classList.remove('wrong'); 
+            }
+        }
+
+
+
+
+
+
+    }
 
 };

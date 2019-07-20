@@ -10,7 +10,7 @@ class Phrase {
     constructor(phrase) {
         this.phrase = phrase.phrase.toLowerCase();
     }
-    // -- Step Six: addPhraseToDisplay() method
+    // -- Step Six: addPhraseToDisplay()
     addPhraseToDisplay() {
         // 1. Create a div with id `phrase` and class `section`, append to DOM
         const phraseDiv = document.getElementById('phrase');
@@ -25,7 +25,6 @@ class Phrase {
         phraseDiv.appendChild(ul);
         // split phrase, so we have each character separate e.g. 'w', 'e', 'l', 'c', 'o', 'm', 'e'
         const phraseSplit = this.phrase.split('');
-        // console.log(phraseSplit);
         // 3. Create li elements in a loop, then nest within ul
         for (let i = 0; i < phraseSplit.length; i++) {
             // console.log(phraseSplit[i]);
@@ -39,7 +38,6 @@ class Phrase {
                 li.classList.add('hide', 'letter', currentLetter);
                 li.innerText = currentLetter;
             }
-            // console.log(li); 
             ul.appendChild(li);
         }
     }
