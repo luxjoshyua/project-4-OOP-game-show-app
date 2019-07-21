@@ -9,6 +9,7 @@ class Phrase {
     // -- Step Three: Create a constructor method inside Phrase class
     constructor(phrase) {
         this.phrase = phrase.phrase.toLowerCase();
+        
     }
     // -- Step Six: addPhraseToDisplay()
     addPhraseToDisplay() {
@@ -47,8 +48,6 @@ class Phrase {
     */
     checkLetter(letter) {
         // 1. Capture the clicked/chosen letter in an event   
-        // select the active phrase you are going to compare against, but split it into characters
-        // const phrase = this.activePhrase.split('');
         // 2. Check the clicked letter against the phrase for a match
         if (this.phrase.includes(letter)) {
             this.showMatchedLetter(letter);

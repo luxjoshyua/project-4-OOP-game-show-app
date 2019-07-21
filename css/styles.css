@@ -28,9 +28,14 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
+  border: 15px solid #ffd3c4;
+  -webkit-animation: rainbow 10s;
+  margin: 0px; 
 }
 
-li, ol, ul {
+li,
+ol,
+ul {
   padding: 0;
   display: inline-block;
 }
@@ -61,8 +66,8 @@ button {
 }
 
 #btn__reset {
-	width: 200px;
-	margin: 0 auto;
+  width: 200px;
+  margin: 0 auto;
 }
 
 .main-container {
@@ -79,7 +84,7 @@ button {
   padding: 10px;
 }
 
-#phrase ul li{
+#phrase ul li {
   margin-top: 15px;
 }
 
@@ -202,3 +207,27 @@ button {
 .lose a {
   color: var(--color-lose);
 }
+
+
+/* additional CSS features */
+
+@-webkit-keyframes rainbow {
+  0% {
+    border-color: #fb412d;
+  }
+
+  33.3333333333% {
+    border-color: #ffacb9;
+  }
+
+  66.66666666667% {
+    border-color: #4a2dfb;
+  }
+
+  100% {
+    border-color: #2d9dfb;
+  }
+}
+
+
+/* on div with class .start, you need to cycle through a range of colours e.g. lightgreen. #fb412d, #2d9dfb, #4a2dfb */

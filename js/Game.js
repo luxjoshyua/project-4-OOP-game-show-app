@@ -35,7 +35,10 @@ class Game {
         const keyboard = document.getElementById('qwerty');
         keyboard.addEventListener('click', (e) => {
             this.handleInteraction(e);
-        })
+        });
+
+        
+
     }
 
     getRandomPhrase() {
@@ -63,22 +66,27 @@ class Game {
     /*
     -- Step Nine: handleInteraction()
     */
+
+
+
     handleInteraction(e) {
         // console.log(e); check the event is actually registering
-        // console.log( e.target.textContent ); this is the text character clicked
         // this variable holds the keyboard button clicked
         const clicked = e.target;
-    
+
         /* -- Step Eleven: build out the handleInteraction()
         */
 
         if (this.phrase.checkLetter(e.target.textContent) === true) {
             this.checkForWin();
             // add `chosen` class to the clicked character
+            // FIXME: this is applying the class to the whole row, not just the button clicked
             clicked.classList.add('chosen');
+            
         } else {
             this.removeLife();
             // add `wrong` class to the clicked character
+            // FIXME: this is applying the class to the whole row, not just the button clicked
             clicked.classList.add('wrong');
             // prevent the user from clicking the same wrong button again
             clicked.disabled = 'true'; 
@@ -147,6 +155,7 @@ class Game {
             this.resetLife();
         }
     }
+
     // reset the hearts method
     resetLife() {
         // reset the hearts back to full blue
@@ -157,23 +166,15 @@ class Game {
         // reset the missed property to 0
         this.missed = 0;
 
-        // remove the `wrong` and `chosen` classes for the relevant clicked button when the game resets
+        // remove the `wrong` and `chosen` classes for all buttons, replace with `key`
+        const keys = document.querySelectorAll('#qwerty button'); 
+        // FIXME: the last button clicked always has the class still applied, all the rest are good
 
-        // maybe setup a loop, go through all the buttons, see if they do have those classes, and then remove?
-
-        const button = document.querySelectorAll('.keyrow button'); 
-        // console.log(button); loops through them all correctly
-
-        for ( let i = 0; i < button.length; i++ ) {
-            const j = buttons[i]; 
-            if ( j.classList.contains('chosen') ) {
-                j.classList.remove('chosen'); 
-            } else if (j.classList.contains('wrong') ) {
-                j.classList.remove('wrong'); 
-            }
-        }
-
-
+        // is it because the last character, for some weird reason, isn't being included in the querySelectorAll ?
+        keys.forEach(function (key) {
+            key.classList.remove('chosen', 'wrong'); 
+            key.classList.add('key');
+        });
 
 
 
