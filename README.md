@@ -9,10 +9,11 @@
 
 # Extra Credit Features
 * Let players use their physical computer keyboard to enter guesses; use the keydown or keyup event.
-* Make the project my own by making some CSS changes, preliminary ideas:
-    * moving border
+* Make the project my own by making some CSS changes: 
+    * Every time page is refreshed, start-screen background colour is different
+    * Animated border
     * cool cursor
-    * landing screen is a different background colour each time user refreshes
+    
 
 # Key learnings
 * An understanding of the basic principles of Object-Oriented Programming

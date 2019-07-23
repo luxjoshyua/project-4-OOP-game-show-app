@@ -13,31 +13,58 @@ class Game {
     constructor() {
         this.missed = 0;
         // -- Step Four: add 5 new Phrase objects directly in the empty array that was originally set as the value of the `phrases` property. 
-        this.phrases = [{
-                phrase: 'good morning sunshine'
-            },
-            {
-                phrase: 'hello world'
-            },
-            {
-                phrase: 'good morning Vietnam'
-            },
+        this.phrases = [
             {
                 phrase: 'absolute power corrupts absolutely'
             },
             {
-                phrase: 'welcome home honey'
+                phrase: 'I know you are here to kill me. Shoot, coward, you are only going to kill a man.'
+            },
+            {
+                phrase: 'The history of all hitherto existing society is the history of class struggles.'
+            },
+            {
+                phrase: 'I don\'t think any person in America should die because they are too poor to live.'
+            },
+            {
+                phrase: 'How close we could look into a bright future should two, three or many Vietnams flourish throughout the world.'
+            },
+            {
+                phrase: 'Democratic socialism means that we must create an economy that works for all, not just the very wealthy.'
+            },
+            {
+                phrase: 'All of the police measures we’ve undertaken in the last 100 years against drug trafficking have multiplied crime. Drugs have spread and violence has overrun society.'
+            },
+            {
+                phrase: 'Life is life. Some of the wisest people you meet are sweeping our streets.',
+            },
+            {
+                phrase: 'But that is who we are, that is where we come from. We are the offspring of metropolitan annihilation and destruction.'
+            },
+            {
+                phrase: 'Now is the time of the furnaces, and only light should be seen.'
             }
+        
         ]
         this.activePhrase = 'null';
 
         // call click event on keyboard for Step Nine
         const keyboard = document.getElementById('qwerty');
+        // const keyboard = document.querySelectorAll('#qwerty button'); 
         keyboard.addEventListener('click', (e) => {
             this.handleInteraction(e);
         });
 
-        
+        /* TODO: add Event listener has been added for the keydown or keyup event so that pressing a physical keyboard button results 
+        in the handleInteraction() method being called for the associated onscreen keyboard button */
+
+        // const keyDown = document.querySelectorAll('#qwerty button'); 
+        // keyDown.addEventListener('keydown', (e) => {
+
+
+        // }); 
+
+
 
     }
 
@@ -67,12 +94,11 @@ class Game {
     -- Step Nine: handleInteraction()
     */
 
-
-
     handleInteraction(e) {
         // console.log(e); check the event is actually registering
         // this variable holds the keyboard button clicked
-        const clicked = e.target;
+        const clicked = e.target; 
+        
 
         /* -- Step Eleven: build out the handleInteraction()
         */
@@ -80,12 +106,9 @@ class Game {
         if (this.phrase.checkLetter(e.target.textContent) === true) {
             this.checkForWin();
             // add `chosen` class to the clicked character
-            // FIXME: this is applying the class to the whole row, not just the button clicked
             clicked.classList.add('chosen');
-            
         } else {
             // add `wrong` class to the clicked character
-            // FIXME: this is applying the class to the whole row, not just the button clicked
             clicked.classList.add('wrong');
             // prevent the user from clicking the same wrong button again
             clicked.disabled = 'true'; 
@@ -136,7 +159,6 @@ class Game {
     -- Step Nine: gameOver()
     Displays game over message
     */
-
     gameOver(gameWon) {
         // show the original start screen
         const startScreen = document.getElementById('overlay');
@@ -165,20 +187,12 @@ class Game {
         });
         // reset the missed property to 0
         this.missed = 0;
-
-        // remove the `wrong` and `chosen` classes for all buttons, replace with `key`
+        // remove the `wrong` and `chosen` classes for all buttons when the game resets
         const keys = document.querySelectorAll('#qwerty button'); 
-        // FIXME: the last button clicked always has the class still applied, all the rest are good
-        console.log(keys); 
-        // is it because the last character, for some weird reason, isn't being included in the querySelectorAll ?
         keys.forEach(function (key) {
             key.classList.remove('chosen', 'wrong'); 
             key.disabled = false; 
-            console.log(key);
         });
-
-
-
 
     }
 

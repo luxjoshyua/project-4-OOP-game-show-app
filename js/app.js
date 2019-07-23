@@ -11,7 +11,6 @@
 let game
 // add a "click" event listener to the HTML `<button>` element with an `id` of `btn__reset`. 
 const button = document.getElementById('btn__reset'); 
-
 button.addEventListener('click', (e) => {
     // Inside the callback function for this click event listener, use your `game` variable to instantiate a new Game object. 
     game = new Game(); 
@@ -19,15 +18,8 @@ button.addEventListener('click', (e) => {
     game.startGame(); 
 }); 
 
-/* TODO: add Event listener has been added for the keydown or keyup event so that pressing a physical keyboard button results 
-in the handleInteraction() method being called for the associated onscreen keyboard button */
-
-
-
 // random background colour refresh
-
 const bg = document.querySelector('.start'); 
 const colors =  ['#fb412d', '#2d9dfb', '#4a2dfb', '#ffacb9']; // generate random colours instead of set hexdecimal 
-
 // console.log( Math.floor( Math.random() * Math.floor(4) ) );
 bg.style.background = colors[Math.floor( Math.random() * Math.floor(4) )];

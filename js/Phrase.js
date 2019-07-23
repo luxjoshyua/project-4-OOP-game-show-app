@@ -42,7 +42,6 @@ class Phrase {
             ul.appendChild(li);
         }
     }
-
     /* -- Step Nine: checkLetter()
     Checks if passed letter is in phrase
     */
@@ -56,7 +55,6 @@ class Phrase {
             return false;
         }
     }
-
     /* -- Step Nine: showMatchedLetter()
     Displays passed letter on screen after a match is found
     */
