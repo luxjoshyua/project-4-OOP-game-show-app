@@ -84,12 +84,12 @@ class Game {
             clicked.classList.add('chosen');
             
         } else {
+            this.removeLife();
             // add `wrong` class to the clicked character
             // FIXME: this is applying the class to the whole row, not just the button clicked
             clicked.classList.add('wrong');
             // prevent the user from clicking the same wrong button again
             clicked.disabled = 'true'; 
-            this.removeLife();
         }
     }
 
@@ -169,11 +169,11 @@ class Game {
         // remove the `wrong` and `chosen` classes for all buttons, replace with `key`
         const keys = document.querySelectorAll('#qwerty button'); 
         // FIXME: the last button clicked always has the class still applied, all the rest are good
-        console.log(keys); 
+
         // is it because the last character, for some weird reason, isn't being included in the querySelectorAll ?
         keys.forEach(function (key) {
             key.classList.remove('chosen', 'wrong'); 
-            key.disabled = false; 
+            key.classList.add('key');
             console.log(key);
         });
 
