@@ -13,38 +13,34 @@ class Game {
     constructor() {
         this.missed = 0;
         // -- Step Four: add 5 new Phrase objects directly in the empty array that was originally set as the value of the `phrases` property. 
-        this.phrases = [
-            {
+        this.phrases = [{
                 phrase: 'absolute power corrupts absolutely'
             },
             {
-                phrase: 'I know you are here to kill me. Shoot, coward, you are only going to kill a man.'
+                phrase: 'I know you are here to kill me shoot coward you are only going to kill a man'
             },
             {
-                phrase: 'The history of all hitherto existing society is the history of class struggles.'
+                phrase: 'The history of all hitherto existing society is the history of class struggles'
             },
             {
-                phrase: 'I don\'t think any person in America should die because they are too poor to live.'
+                phrase: 'I do not think any person in America should die because they are too poor to live'
             },
             {
-                phrase: 'How close we could look into a bright future should two, three or many Vietnams flourish throughout the world.'
+                phrase: 'How close we could look into a bright future should two three or many Vietnams flourish throughout the world'
             },
             {
-                phrase: 'Democratic socialism means that we must create an economy that works for all, not just the very wealthy.'
+                phrase: 'Democratic socialism means that we must create an economy that works for all not just the very wealthy'
             },
             {
-                phrase: 'All of the police measures we’ve undertaken in the last 100 years against drug trafficking have multiplied crime. Drugs have spread and violence has overrun society.'
+                phrase: 'Life is life some of the wisest people you meet are sweeping our streets'
             },
             {
-                phrase: 'Life is life. Some of the wisest people you meet are sweeping our streets.',
+                phrase: 'But that is who we are that is where we come from We are the offspring of metropolitan annihilation and destruction'
             },
             {
-                phrase: 'But that is who we are, that is where we come from. We are the offspring of metropolitan annihilation and destruction.'
-            },
-            {
-                phrase: 'Now is the time of the furnaces, and only light should be seen.'
+                phrase: 'Now is the time of the furnaces and only light should be seen'
             }
-        
+
         ]
         this.activePhrase = 'null';
 
@@ -55,17 +51,23 @@ class Game {
             this.handleInteraction(e);
         });
 
-        /* TODO: add Event listener has been added for the keydown or keyup event so that pressing a physical keyboard button results 
-        in the handleInteraction() method being called for the associated onscreen keyboard button */
-
-        // const keyDown = document.querySelectorAll('#qwerty button'); 
-        // keyDown.addEventListener('keydown', (e) => {
-
-
-        // }); 
-
-
-
+        // listen for keyboard events
+        document.addEventListener('keydown', (e) => {
+            // 1. get the letter that was pressed, console.log to check it's the correct value
+            // capture the event
+            const key = e.key;
+            // find all the keys
+            const keys = document.querySelectorAll('.key');
+            // loop through the keys
+            for (let i = 0; i < keys.length; i += 1) {
+                // check if the key is equal to the keyboard clicked
+                if (keys[i].innerHTML === key) {
+                    // if it is, simulate a mosue click on the element
+                    keys[i].click();
+                    return;
+                }
+            }
+        });
     }
 
     getRandomPhrase() {
@@ -97,21 +99,27 @@ class Game {
     handleInteraction(e) {
         // console.log(e); check the event is actually registering
         // this variable holds the keyboard button clicked
-        const clicked = e.target; 
-        
+        const clicked = e.target;
+        // console.log(clicked);
+
+        // if click event doesn't contain the class key, then return
+        if (!clicked.classList.contains('key')) {
+            return;
+        }
 
         /* -- Step Eleven: build out the handleInteraction()
-        */
+         */
 
         if (this.phrase.checkLetter(e.target.textContent) === true) {
-            this.checkForWin();
             // add `chosen` class to the clicked character
             clicked.classList.add('chosen');
+            this.checkForWin();
         } else {
             // add `wrong` class to the clicked character
             clicked.classList.add('wrong');
             // prevent the user from clicking the same wrong button again
-            clicked.disabled = 'true'; 
+            clicked.disabled = 'true';
+
             this.removeLife();
         }
     }
@@ -174,8 +182,8 @@ class Game {
             heading.textContent = 'Better luck next time, comrade!';
             startScreen.classList.add('lose');
             // call the resetLife(), which is needed 
-            this.resetLife();
         }
+        this.resetLife();
     }
 
     // reset the hearts method
@@ -188,12 +196,11 @@ class Game {
         // reset the missed property to 0
         this.missed = 0;
         // remove the `wrong` and `chosen` classes for all buttons when the game resets
-        const keys = document.querySelectorAll('#qwerty button'); 
+        const keys = document.querySelectorAll('#qwerty button');
         keys.forEach(function (key) {
-            key.classList.remove('chosen', 'wrong'); 
-            key.disabled = false; 
+            key.classList.remove('chosen', 'wrong');
+            key.disabled = false;
         });
 
     }
-
 };
