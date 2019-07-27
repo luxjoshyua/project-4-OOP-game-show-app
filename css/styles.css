@@ -1,6 +1,8 @@
 /* Main styles */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&Roboto:300');
 
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,600,700&display=swap');
+
 /* Variables */
 
 :root {
@@ -9,7 +11,7 @@
   --color-start: #5b85b7;
   --color-neutral: #445069;
   --color-neutral-light: #D2D2D2;
-  --color-keys: #37474F;
+  --color-keys: #000;
   --color-keys-light: #E5E5E5;
   --font-size-large: 60px;
   --font-size-medium: 20px;
@@ -20,7 +22,8 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
+  font-family: 'Nunito', sans-serif;
 }
 
 body {
@@ -91,7 +94,8 @@ button {
 /* Title */
 
 .header {
-  color: #3a3f58;
+  color: #000; 
+  font-weight: 300; 
 }
 
 

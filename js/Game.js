@@ -53,154 +53,154 @@ class Game {
 
         // listen for keyboard events
         document.addEventListener('keydown', (e) => {
-            // 1. get the letter that was pressed, console.log to check it's the correct value
-            // capture the event
-            const key = e.key;
-            // find all the keys
-            const keys = document.querySelectorAll('.key');
-            // loop through the keys
-            for (let i = 0; i < keys.length; i += 1) {
-                // check if the key is equal to the keyboard clicked
-                if (keys[i].innerHTML === key) {
-                    // if it is, simulate a mosue click on the element
-                    keys[i].click();
-                    return;
+                // 1. get the letter that was pressed, console.log to check it's the correct value
+                // capture the event
+                const key = e.key;
+                // find all the keys
+                const keys = document.querySelectorAll('.key');
+                // loop through the keys
+                for (let i = 0; i < keys.length; i += 1) {
+                    // check if the key is equal to the keyboard clicked
+                    if (keys[i].innerHTML === key) {
+                        // if it is, simulate a mosue click on the element
+                        keys[i].click();
+                        return;
+                    }
+                }
+            });
+        }
+
+        getRandomPhrase() {
+            // -- Step Five: getRandomPhrase needs to select the random phrase then return the random phrase
+            let randomPhrase = this.phrases[Math.floor(Math.random() * this.phrases.length)];
+            return randomPhrase;
+        }
+
+        /* -- Step Seven: startGame()
+            - this method begins game by selecting a random phrase and displaying it to user */
+        startGame() {
+            // 1. Hide the start screen overlay
+            const hideScreen = document.getElementById('overlay');
+            hideScreen.style.display = 'none';
+            // 2. Call the `getRandomPhrase()` method to select a Phrase object from the Game object’s array of phrases
+            this.activePhrase = this.getRandomPhrase();
+            // console.log(this.activePhrase); 
+            // 3. Setup phrase variable, then run it by calling the new Phrase(); 
+            this.phrase = new Phrase(this.activePhrase);
+            // 4. Add the phrase to the gameboard
+            // The selected phrase should be stored in the Game’s `activePhrase` property, so it can be easily accessed throughout the game. 
+            this.phrase.addPhraseToDisplay();
+        }
+
+        /*
+        -- Step Nine: handleInteraction()
+        */
+
+        handleInteraction(e) {
+            // console.log(e); check the event is actually registering
+            // this variable holds the keyboard button clicked
+            const clicked = e.target;
+            // console.log(clicked);
+
+            // if click event doesn't contain the class key, then return
+            if (!clicked.classList.contains('key')) {
+                return;
+            }
+
+            /* -- Step Eleven: build out the handleInteraction()
+             */
+
+            if (this.phrase.checkLetter(e.target.textContent) === true) {
+                // add `chosen` class to the clicked character
+                clicked.classList.add('chosen');
+                this.checkForWin();
+            } else {
+                // add `wrong` class to the clicked character
+                clicked.classList.add('wrong');
+                // prevent the user from clicking the same wrong button again
+                clicked.disabled = 'true';
+
+                this.removeLife();
+            }
+        }
+
+        /*
+        -- Step Nine: checkForWin()
+        Checks for winning move
+        */
+        checkForWin() {
+            // select the phrase
+            const currentPhrase = document.querySelectorAll('#phrase li');
+            // you have to loop through because you're checking each character in the served phrase
+            for (let i = 0; i < currentPhrase.length; i++) {
+                // setup variable here that equals currentPhrase[i]
+                const phrase = currentPhrase[i];
+                if (phrase.classList.contains('hide')) {
+                    // return false if game hasn't been won
+                    return false;
                 }
             }
-        });
-    }
-
-    getRandomPhrase() {
-        // -- Step Five: getRandomPhrase needs to select the random phrase then return the random phrase
-        let randomPhrase = this.phrases[Math.floor(Math.random() * this.phrases.length)];
-        return randomPhrase;
-    }
-
-    /* -- Step Seven: startGame()
-        - this method begins game by selecting a random phrase and displaying it to user */
-    startGame() {
-        // 1. Hide the start screen overlay
-        const hideScreen = document.getElementById('overlay');
-        hideScreen.style.display = 'none';
-        // 2. Call the `getRandomPhrase()` method to select a Phrase object from the Game object’s array of phrases
-        this.activePhrase = this.getRandomPhrase();
-        // console.log(this.activePhrase); 
-        // 3. Setup phrase variable, then run it by calling the new Phrase(); 
-        this.phrase = new Phrase(this.activePhrase);
-        // 4. Add the phrase to the gameboard
-        // The selected phrase should be stored in the Game’s `activePhrase` property, so it can be easily accessed throughout the game. 
-        this.phrase.addPhraseToDisplay();
-    }
-
-    /*
-    -- Step Nine: handleInteraction()
-    */
-
-    handleInteraction(e) {
-        // console.log(e); check the event is actually registering
-        // this variable holds the keyboard button clicked
-        const clicked = e.target;
-        // console.log(clicked);
-
-        // if click event doesn't contain the class key, then return
-        if (!clicked.classList.contains('key')) {
-            return;
+            this.gameOver(true);
         }
 
-        /* -- Step Eleven: build out the handleInteraction()
-         */
-
-        if (this.phrase.checkLetter(e.target.textContent) === true) {
-            // add `chosen` class to the clicked character
-            clicked.classList.add('chosen');
-            this.checkForWin();
-        } else {
-            // add `wrong` class to the clicked character
-            clicked.classList.add('wrong');
-            // prevent the user from clicking the same wrong button again
-            clicked.disabled = 'true';
-
-            this.removeLife();
-        }
-    }
-
-    /*
-    -- Step Nine: checkForWin()
-    Checks for winning move
-    */
-    checkForWin() {
-        // select the phrase
-        const currentPhrase = document.querySelectorAll('#phrase li');
-        // you have to loop through because you're checking each character in the served phrase
-        for (let i = 0; i < currentPhrase.length; i++) {
-            // setup variable here that equals currentPhrase[i]
-            const phrase = currentPhrase[i];
-            if (phrase.classList.contains('hide')) {
-                // return false if game hasn't been won
-                return false;
+        /*
+        -- Step Nine: removeLife()
+        Increases the value of the missed property
+        Removes a life from the scoreboard
+        Checks if player has remaining lives and ends game if player is out
+        */
+        removeLife() {
+            // select the heart images
+            const hearts = document.querySelectorAll('.tries img');
+            // select the heart, swap the image 
+            hearts[this.missed].src = 'images/lostHeart.png';
+            // console.log('removeLife method reached'); 
+            this.missed += 1;
+            if (this.missed >= 5) {
+                // you need the `this` because it's all happening in the same Game class
+                this.gameOver(false);
+            } else {
+                return;
             }
         }
-        this.gameOver(true);
-    }
-
-    /*
-    -- Step Nine: removeLife()
-    Increases the value of the missed property
-    Removes a life from the scoreboard
-    Checks if player has remaining lives and ends game if player is out
-    */
-    removeLife() {
-        // select the heart images
-        const hearts = document.querySelectorAll('.tries img');
-        // select the heart, swap the image 
-        hearts[this.missed].src = 'images/lostHeart.png';
-        // console.log('removeLife method reached'); 
-        this.missed += 1;
-        if (this.missed >= 5) {
-            // you need the `this` because it's all happening in the same Game class
-            this.gameOver(false);
-        } else {
-            return;
+        /*
+        -- Step Nine: gameOver()
+        Displays game over message
+        */
+        gameOver(gameWon) {
+            // show the original start screen
+            const startScreen = document.getElementById('overlay');
+            startScreen.style.display = 'flex';
+            const heading = document.querySelector('#game-over-message');
+            // when you lose, you need to reset the grey hearts to blue hearts
+            if (gameWon) {
+                // If the player wins, update the h1
+                heading.textContent = 'Congratulations, you win!';
+                startScreen.classList.add('win');
+            } else {
+                // If the player loses, update the h1
+                heading.textContent = 'Better luck next time, comrade!';
+                startScreen.classList.add('lose');
+                // call the resetLife(), which is needed 
+            }
+            this.resetLife();
         }
-    }
-    /*
-    -- Step Nine: gameOver()
-    Displays game over message
-    */
-    gameOver(gameWon) {
-        // show the original start screen
-        const startScreen = document.getElementById('overlay');
-        startScreen.style.display = 'flex';
-        const heading = document.querySelector('#game-over-message');
-        // when you lose, you need to reset the grey hearts to blue hearts
-        if (gameWon) {
-            // If the player wins, update the h1
-            heading.textContent = 'Congratulations, you win!';
-            startScreen.classList.add('win');
-        } else {
-            // If the player loses, update the h1
-            heading.textContent = 'Better luck next time, comrade!';
-            startScreen.classList.add('lose');
-            // call the resetLife(), which is needed 
+
+        // reset the hearts method
+        resetLife() {
+            // reset the hearts back to full blue
+            const hearts = document.querySelectorAll('.tries img');
+            hearts.forEach(function (heart) {
+                heart.src = 'images/liveHeart.png';
+            });
+            // reset the missed property to 0
+            this.missed = 0;
+            // remove the `wrong` and `chosen` classes for all buttons when the game resets
+            const keys = document.querySelectorAll('#qwerty button');
+            keys.forEach(function (key) {
+                key.classList.remove('chosen', 'wrong');
+                key.disabled = false;
+            });
+
         }
-        this.resetLife();
-    }
-
-    // reset the hearts method
-    resetLife() {
-        // reset the hearts back to full blue
-        const hearts = document.querySelectorAll('.tries img');
-        hearts.forEach(function (heart) {
-            heart.src = 'images/liveHeart.png';
-        });
-        // reset the missed property to 0
-        this.missed = 0;
-        // remove the `wrong` and `chosen` classes for all buttons when the game resets
-        const keys = document.querySelectorAll('#qwerty button');
-        keys.forEach(function (key) {
-            key.classList.remove('chosen', 'wrong');
-            key.disabled = false;
-        });
-
-    }
-};
+    };
