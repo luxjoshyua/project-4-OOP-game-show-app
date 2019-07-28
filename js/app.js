@@ -20,6 +20,11 @@ button.addEventListener('click', (e) => {
 
 // random background colour refresh
 const bg = document.querySelector('.start'); 
-const colors =  ['#fb412d', '#2d9dfb', '#4a2dfb', '#ffacb9']; // generate random colours instead of set hexdecimal 
+const colors =  ['#fb412d', '#2d9dfb', '#4a2dfb', '#ffacb9', '#000', '#']; 
+
+// thanks CSS tricks for this line
+// let colors = Math.floor(Math.random()*16777215).toString(16);
+
 // console.log( Math.floor( Math.random() * Math.floor(4) ) );
 bg.style.background = colors[Math.floor( Math.random() * Math.floor(4) )];
+

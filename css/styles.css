@@ -22,8 +22,11 @@
 
 * {
   box-sizing: border-box;
-  /* font-family: 'Montserrat', sans-serif; */
   font-family: 'Nunito', sans-serif;
+}
+
+a, body {
+  cursor: url('../images/cursor-pizza-white.png'), auto; 
 }
 
 body {
@@ -52,6 +55,7 @@ h2 {
 
 h1 {
   font-size: 30px;
+  font-weight: 300; 
 }
 
 button {
@@ -66,6 +70,20 @@ button {
   -o-transition: var(--transition);
   transition: var(--transition);
   cursor: pointer;
+}
+
+.start-button {
+  background: transparent;
+  color: #fff;
+  text-transform: uppercase; 
+  border-radius: 8px; 
+  border: 2px solid #fff;
+}
+
+.start-button:hover {
+  transform: scale(1.1); 
+  transition-duration: 0.4s; 
+  transition-timing-function: ease-in;
 }
 
 #btn__reset {
@@ -182,9 +200,28 @@ button {
   border-radius: 5px;
 }
 
+/* animation on the heading text */
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+
 .title {
   color: #FFF;
+  animation: marquee 15s linear infinite;
+  font-weight: 300; 
 }
+
+span {
+  white-space: nowrap;
+
+}
+
 
 .start {
   background-color: #3a3f58;
