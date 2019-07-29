@@ -8,12 +8,13 @@
 
 // -- Step Eight: EventListener for 'Start Game' Button
 // Declare a new variable called `game` that’s not set to anything.
-let game
+// Inside the callback function for this click event listener, use your `game` variable to instantiate a new Game object. 
+let game = new Game();
 // add a "click" event listener to the HTML `<button>` element with an `id` of `btn__reset`. 
 const button = document.getElementById('btn__reset'); 
 button.addEventListener('click', (e) => {
-    // Inside the callback function for this click event listener, use your `game` variable to instantiate a new Game object. 
-    game = new Game(); 
+    
+    
     // Call the `startGame()` method on this new Game object.
     game.startGame(); 
 }); 

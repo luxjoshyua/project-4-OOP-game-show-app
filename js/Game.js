@@ -17,28 +17,19 @@ class Game {
                 phrase: 'absolute power corrupts absolutely'
             },
             {
-                phrase: 'I know you are here to kill me shoot coward you are only going to kill a man'
+                phrase: 'hello world'
             },
             {
-                phrase: 'The history of all hitherto existing society is the history of class struggles'
+                phrase: 'welcome to the terrordome'
             },
             {
-                phrase: 'I do not think any person in America should die because they are too poor to live'
+                phrase: 'the waves are pumping'
             },
             {
-                phrase: 'How close we could look into a bright future should two three or many Vietnams flourish throughout the world'
+                phrase: 'get up and go'
             },
             {
-                phrase: 'Democratic socialism means that we must create an economy that works for all not just the very wealthy'
-            },
-            {
-                phrase: 'Life is life some of the wisest people you meet are sweeping our streets'
-            },
-            {
-                phrase: 'But that is who we are that is where we come from We are the offspring of metropolitan annihilation and destruction'
-            },
-            {
-                phrase: 'Now is the time of the furnaces and only light should be seen'
+                phrase: 'sonic the hedgehog'
             }
 
         ]
@@ -62,7 +53,7 @@ class Game {
             for (let i = 0; i < keys.length; i += 1) {
                 // check if the key is equal to the keyboard clicked
                 if (keys[i].innerHTML === key) {
-                    // if it is, simulate a mosue click on the element
+                    // if it is, simulate a mouse click on the element
                     keys[i].click();
                     return;
                 }
@@ -100,27 +91,27 @@ class Game {
         // console.log(e); check the event is actually registering
         // this variable holds the keyboard button clicked
         const clicked = e.target;
-        // console.log(clicked);
-
+        // debugger;
         // if click event doesn't contain the class key, then return
         if (!clicked.classList.contains('key')) {
+            console.log('handled 1')
             return;
         }
 
-        /* -- Step Eleven: build out the handleInteraction()
-         */
-
         if (this.phrase.checkLetter(e.target.textContent) === true) {
             // add `chosen` class to the clicked character
+            console.log('handled 2')
             clicked.classList.add('chosen');
             this.checkForWin();
         } else {
             // add `wrong` class to the clicked character
+            console.log('handled 3')
             clicked.classList.add('wrong');
             // prevent the user from clicking the same wrong button again
             clicked.disabled = 'true';
             this.removeLife();
         }
+        
     }
 
     /*
@@ -153,7 +144,6 @@ class Game {
         const hearts = document.querySelectorAll('.tries img');
         // select the heart, swap the image 
         hearts[this.missed].src = 'images/lostHeart.png';
-        // console.log('removeLife method reached'); 
         this.missed += 1;
         if (this.missed >= 5) {
             // you need the `this` because it's all happening in the same Game class
@@ -173,44 +163,34 @@ class Game {
         const heading = document.querySelector('#game-over-message');
         // when you lose, you need to reset the grey hearts to blue hearts
         if (gameWon) {
-
-            // if the game is won, I want that screen to hang there for approx 3 seconds before it change
-
-            setTimeout(function () {
-                // If the player wins, update the h1
-                heading.textContent = 'Congratulations, you win!';
-                startScreen.classList.add('win');
-            }, (3000) );
-
             // If the player wins, update the h1
-            // heading.textContent = 'Congratulations, you win!';
-            // startScreen.classList.add('win');
-
-
+            heading.textContent = 'Congratulations, you win!';
+            startScreen.classList.add('win');
         } else {
             // If the player loses, update the h1
             heading.textContent = 'Better luck next time, comrade!';
             startScreen.classList.add('lose');
-            // call the resetLife(), which is needed 
         }
+        // call the resetLife(), which is needed 
         this.resetLife();
     }
-
     // reset the hearts method
     resetLife() {
         // reset the hearts back to full blue
         const hearts = document.querySelectorAll('.tries img');
         hearts.forEach(function (heart) {
             heart.src = 'images/liveHeart.png';
+            console.log( 'heart reset' );
         });
         // reset the missed property to 0
         this.missed = 0;
+        // console.log(this.missed)
         // remove the `wrong` and `chosen` classes for all buttons when the game resets
         const keys = document.querySelectorAll('#qwerty button');
+
         keys.forEach(function (key) {
             key.classList.remove('chosen', 'wrong');
             key.disabled = false;
         });
-
     }
 };
